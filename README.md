@@ -45,3 +45,55 @@ This paper proposes a **socio-technical framework** explaining convergence dynam
 - Dominant reinforcement loops create a narrowing aesthetic corridor
 - Neutral prompts produce demographically skewed outputs, revealing embedded selection bias
 - The feedback cycle between user engagement and model training amplifies initial biases
+
+
+---
+
+## Framework Diagram
+
+```
+User Prompts --> Generative Model --> Outputs
+                      ^                  |
+                      |                  v
+              Training Data <-- User Selection
+                      ^                  |
+                      |                  v
+              Aesthetic Convergence Loop
+                      |
+              Representational Narrowing
+```
+
+---
+
+## Tech Stack
+
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-11557c?style=for-the-badge)]()
+![DALL-E](https://img.shields.io/badge/DALL--E-412991?style=for-the-badge&logo=openai&logoColor=white)]()
+
+</div>
+
+---
+
+## Authors
+
+- **Prithweeraj Acharjee Porag** (First Author) - [![GitHub](https://img.shields.io/badge/GitHub-Prithweeraj--Acharjee-181717?style=flat-square&logo=github)](https://github.com/Prithweeraj-Acharjee) [![Portfolio](https://img.shields.io/badge/Portfolio-prithwee.vercel.app-000000?style=flat-square&logo=vercel)](https://prithwee.vercel.app)
+
+---
+
+## Venue
+
+**Midwest Graduate Research Symposium 2026** - Poster Presentation
+
+---
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:161b22,100:1f6feb&height=100&section=footer" width="100%" />
+</div>

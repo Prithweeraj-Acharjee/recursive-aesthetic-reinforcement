@@ -360,21 +360,26 @@ def run_occupation(
     threshold: float,
     out_dir: Path,
     hf_token: str | None,
+    *,
+    scan_cap: int = 2_500_000,
 ) -> OccupationResult:
     """Sample, classify, test for one occupation. Writes per-occupation CSVs."""
     pandas = _required("pandas")
 
     sys.stderr.write(f"\n=== {canonical} (threshold={threshold}, n={n}) ===\n")
 
-    sys.stderr.write(f"[{canonical}] streaming baseline…\n")
-    baseline = list(stream_samples(
-        DATASETS["baseline"], canonical, regex, n, hf_token=hf_token,
-    ))
+    sys.stderr.write(f"[{canonical}] streaming baseline (cap={scan_cap:,})…\n")
+    baseline_buckets, _ = stream_samples_multi(
+        DATASETS["baseline"], [(canonical, regex)], n,
+        hf_token=hf_token, scan_cap=scan_cap,
+    )
+    baseline = baseline_buckets[canonical]
     sys.stderr.write(f"[{canonical}] streaming aesthetics-filtered…\n")
-    filtered = list(stream_samples(
-        DATASETS["aesthetics"], canonical, regex, n,
-        aesthetic_min=threshold, hf_token=hf_token,
-    ))
+    filtered_buckets, _ = stream_samples_multi(
+        DATASETS["aesthetics"], [(canonical, regex)], n,
+        aesthetic_min=threshold, hf_token=hf_token, scan_cap=scan_cap,
+    )
+    filtered = filtered_buckets[canonical]
     sys.stderr.write(
         f"[{canonical}] sampled {len(baseline)} baseline / "
         f"{len(filtered)} filtered\n"

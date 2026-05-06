@@ -12,6 +12,8 @@
 \usepackage{microtype}
 \usepackage{amsmath}
 \usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc, shapes.geometric}
 \usepackage{hyperref}
 \hypersetup{
   colorlinks=true,
@@ -93,6 +95,38 @@ These two literatures coexist without speaking to one another. The first asks: \
 But humans are not passive. The DALL$\cdot$E image of ``a CEO'' does not stay on OpenAI's servers. It is downloaded, posted to Twitter, embedded in slide decks, scraped into LAION-Aesthetics, used to fine-tune a hundred Stable Diffusion forks, surfaced in a Pinterest board that becomes part of the next crawl. \textbf{Each of those steps is a human decision}, and each one biases the surface from which the next model will learn. The loop is not \emph{machine self-training}. It is \emph{machine output \(\rightarrow\) human selection \(\rightarrow\) public surface \(\rightarrow\) training data}. The human is the bridge.
 
 We name this loop \textbf{Recursive Aesthetic Reinforcement (RAR)}.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  node distance=10mm and 14mm,
+  every node/.style={font=\small},
+  stage/.style={
+    rectangle, rounded corners=2pt,
+    draw=black!70, thick,
+    minimum width=24mm, minimum height=11mm,
+    align=center, fill=black!3,
+  },
+  flow/.style={-{Latex[length=2mm]}, thick, draw=black!70},
+  label/.style={font=\scriptsize\itshape, text=black!60},
+]
+  \node[stage] (s1) {\textbf{1. Generation}\\\scriptsize $M_t$ produces $o$};
+  \node[stage, right=of s1] (s2) {\textbf{2. Recognition}\\\scriptsize human reads $o$ as ``representative''};
+  \node[stage, below=of s2] (s3) {\textbf{3. Redistribution}\\\scriptsize human shares $o$ to surface $S$};
+  \node[stage, below=of s1] (s4) {\textbf{4. Reingestion}\\\scriptsize curation rule $f$ samples from $S$ into $C'$};
+
+  \draw[flow] (s1) -- (s2) node[midway, above, label] {prompt-implied skew};
+  \draw[flow] (s2) -- (s3) node[midway, right, label] {preference $\to$ intent};
+  \draw[flow] (s3) -- (s4) node[midway, below, label] {visibility $\to$ corpus};
+  \draw[flow] (s4) -- node[midway, left, label] {$M_{t+1}$ inherits} (s1);
+
+  \node[font=\footnotesize, text=black!50] at ($(s1)!0.5!(s3) + (10mm, 0)$) {\emph{the human is the bridge}};
+\end{tikzpicture}
+\caption{The four stages of Recursive Aesthetic Reinforcement. The model generates a stereotyped output; a human recognizes it as representative; the human redistributes it to a public surface; a curation rule (aesthetic-score filter, popularity ranker, RLHF reward dataset) reingests it into the next training corpus. Each cycle compresses the representational distribution. Without the human steps (2 and 3), the loop does not close; this is the differentiator from prior automatic-self-training accounts of model collapse.}
+\label{fig:rar-loop}
+\end{figure}
+
+The diagram in Figure~\ref{fig:rar-loop} makes the central claim visible: the loop is closed not by self-training in isolation, but by human selection acting on model outputs that then re-enter the training pipeline through curation. Remove stage 2 or 3, and the dynamic vanishes.
 
 The contribution of this paper is threefold:
 

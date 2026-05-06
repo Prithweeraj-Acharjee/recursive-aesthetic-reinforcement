@@ -49,7 +49,11 @@ If our framework is right, the curation step here amplifies the same demographic
 
 4. **We do not test downstream effect on a model trained on the filtered subset.** That requires controlled training compute we don't have. The full loop closure (`M_{t+1}` produced from filtered C' is more biased than `M_t`) is the next paper.
 
-5. **LAION's status is fragile.** The original LAION-5B was taken offline in late 2023 due to CSAM contamination concerns; subsequent re-releases are partial. Our analysis uses the publicly available re-release as of [DATE]. We check data availability before publication.
+5. **LAION's status is fragile.** The original LAION-5B was taken offline in late 2023 due to CSAM contamination concerns. The current canonical safe replacements (verified on Hugging Face, May 2026) are:
+   - **`laion/relaion2B-en-research-safe`** — the post-cleanup baseline subset (~93K downloads, 216 likes as of last check). Status: **gated** on Hugging Face — requires a one-time access request.
+   - **`laion/laion2B-en-aesthetic`** — the aesthetic-filtered subset (~53K downloads, 69 likes). Also **gated**.
+   
+   Both must be requested individually via the dataset cards. Approval is typically automatic for academic/research use but not instant; allow 1–2 days. Our analysis script `analyze_laion_aesthetics.py` reads these dataset IDs by default; replace if upstream availability changes.
 
 ## Related literature
 

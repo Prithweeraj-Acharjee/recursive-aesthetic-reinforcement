@@ -77,15 +77,14 @@ OCCUPATIONS = {
 # Aesthetic predictor thresholds we'll evaluate at (sensitivity analysis).
 AESTHETIC_THRESHOLDS = (5.0, 6.0, 6.5)
 
-# LAION dataset identifiers. NOTE: LAION availability has been turbulent
-# (CSAM removal in late 2023, partial re-releases). Update these when
-# upstream availability changes.
+# LAION dataset identifiers. Both are GATED on Hugging Face — request
+# access via the dataset card (typically auto-approved within 1-2 days
+# for research use). Original LAION-5B was withdrawn in late 2023 after
+# CSAM contamination; these are the post-cleanup canonical replacements.
 DATASETS = {
-    # Baseline subset — adjust to whatever LAION-5B descendant is currently
-    # available. As of writing, LAION-2B-en is a common stand-in.
-    "baseline": "laion/laion2B-en",
-    # Aesthetics-filtered. Multiple variants exist; we use the v2 score
-    # column attached to the same row IDs.
+    # Baseline subset (post-CSAM-cleanup safe variant of LAION-2B-en).
+    "baseline": "laion/relaion2B-en-research-safe",
+    # Aesthetic-filtered subset, scored by the LAION-Aesthetics-V2 predictor.
     "aesthetics": "laion/laion2B-en-aesthetic",
 }
 

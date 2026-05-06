@@ -1,3 +1,9 @@
+% ============================================================
+% ANONYMIZED FOR DOUBLE-BLIND REVIEW
+% This file is produced by anonymize.py from main.tex.
+% Do NOT submit main.tex to a double-blind venue. Submit this.
+% After acceptance, the camera-ready version reverts to main.tex.
+% ============================================================
 \documentclass[sigconf,nonacm]{acmart}
 
 % ----------------------------------------------------------------------------
@@ -37,27 +43,12 @@
 \title{We Are Trapped in RAR}
 \subtitle{How Human Selection Hardens Generative AI Bias}
 
-\author{Prithweeraj Acharjee Porag}
+\author{Anonymous Authors}
 \affiliation{%
-  \institution{University of Toledo}
-  \city{Toledo}\state{OH}\country{USA}
+  \institution{Anonymous Institution}
+  \country{}
 }
-\email{pporag@rockets.utoledo.edu}
-
-\author{Afroza Nowshin}
-\affiliation{%
-  \institution{University of Toledo}
-  \city{Toledo}\state{OH}\country{USA}
-}
-
-\author{Antardip Himel}
-\affiliation{%
-  \institution{University of Toledo}
-  \city{Toledo}\state{OH}\country{USA}
-}
-% TODO: confirm Antardip's preferred contact email and add \email{...} here.
-
-\renewcommand{\shortauthors}{Acharjee Porag, Nowshin, and Himel}
+\renewcommand{\shortauthors}{Anonymous}
 
 \begin{document}
 
@@ -181,7 +172,7 @@ The full loop is closed when \(M_{t+1}\) trained on \(C'\) produces stage-1 outp
 
 We summarize the pilot here; full materials, including raw images and survey instruments, are in the supplementary materials.
 
-\textbf{Stage 1 --- DALL$\cdot$E~3 outputs.} We submitted ten neutral occupational prompts (``A CEO,'' ``A nurse,'' ``A teacher,'' etc.) to DALL$\cdot$E~3 via ChatGPT, generating two images per prompt for 20 total. The first two authors (P.A.P. and A.N.) independently coded each image for perceived gender, race, attire, and setting; inter-annotator agreement was 100\%. \textbf{All five leadership prompts (CEO, Founder, Manager, Leader, Executive) produced male-coded, white-presenting subjects in business attire in office or boardroom settings, with zero exceptions across all 10 images. All five care/service prompts (Nurse, Teacher, Caregiver, Receptionist, Social Worker) produced female-coded subjects, with zero exceptions across all 10 images.} This replicates Bianchi et al.~\cite{bianchi2023easily} and Luccioni et al.~\cite{luccioni2023stable} on a smaller sample.
+\textbf{Stage 1 --- DALL$\cdot$E~3 outputs.} We submitted ten neutral occupational prompts (``A CEO,'' ``A nurse,'' ``A teacher,'' etc.) to DALL$\cdot$E~3 via ChatGPT, generating two images per prompt for 20 total. The first two authors (Author 1 and Author 2) independently coded each image for perceived gender, race, attire, and setting; inter-annotator agreement was 100\%. \textbf{All five leadership prompts (CEO, Founder, Manager, Leader, Executive) produced male-coded, white-presenting subjects in business attire in office or boardroom settings, with zero exceptions across all 10 images. All five care/service prompts (Nurse, Teacher, Caregiver, Receptionist, Social Worker) produced female-coded subjects, with zero exceptions across all 10 images.} This replicates Bianchi et al.~\cite{bianchi2023easily} and Luccioni et al.~\cite{luccioni2023stable} on a smaller sample.
 
 \textbf{Stage 2 --- Forced-choice recognition.} Seventeen participants completed a survey in which each saw the DALL$\cdot$E default for a given role alongside three diverse stock-photo alternatives, randomized in order. The question: \emph{which best represents this role?} Chance is 25\%. Overall, participants chose the DALL$\cdot$E default 37\% of the time (\(p=.004\), two-tailed binomial against chance). For CEO, 71\% (\(p=.0001\), \(\mathrm{OR}=7.20\)). For Nurse, 59\% (\(p=.003\)). Both survive Bonferroni correction across the nine tested occupations.
 
@@ -191,7 +182,7 @@ We summarize the pilot here; full materials, including raw images and survey ins
 
 \textbf{Two interpretations of the 0\% finding.} Female participants' total avoidance of DALL$\cdot$E defaults for Leader, Teacher, and Caregiver admits two readings, with very different downstream implications: (a) \emph{principled rejection} --- female participants recognize the stereotype \emph{and} actively prefer counter-stereotypical alternatives, in which case RAR's loop is broken at the recognition stage for this group; (b) \emph{out-group dissimilarity} --- female participants do not see themselves in the AI default and choose alternatives that are \emph{closer to themselves} regardless of stereotype content, in which case the loop is not broken but routed differently. The pilot cannot distinguish these. The pre-registered replication includes a counter-stereotypical comparison item (e.g., a male-coded Caregiver vs.\ a female-coded Caregiver vs.\ the DALL$\cdot$E default) to disambiguate.
 
-\textbf{Limitations.} The pilot is intentionally small and hypothesis-generating, not confirmatory. \(n=17\) participants is below threshold for population-level claims; we report effect sizes (Cohen's \(d\), odds ratios) precisely because they are more robust to sample size than point estimates. Participant gender and academic discipline are confounded in our sample (males skewed CSE/engineering, females skewed arts/humanities); the demographic moderation effect could reflect either or both, and we cannot disentangle them at \(n=17\). Cohort effects are real --- our sample drew from the University of Toledo Bangladeshi Students Association network, a community whose default cultural reference points may differ from the general U.S. undergraduate population. Only DALL$\cdot$E~3 was tested at stage 1. We did not control for AI-generated image polish as a confound --- the gender split argues against pure quality-driven preference, but does not rule it out. The pre-registered replication (\(n=120\), three models --- DALL$\cdot$E~3, Midjourney v6, Stable Diffusion XL --- balanced cells across gender and discipline) addresses each of these.
+\textbf{Limitations.} The pilot is intentionally small and hypothesis-generating, not confirmatory. \(n=17\) participants is below threshold for population-level claims; we report effect sizes (Cohen's \(d\), odds ratios) precisely because they are more robust to sample size than point estimates. Participant gender and academic discipline are confounded in our sample (males skewed CSE/engineering, females skewed arts/humanities); the demographic moderation effect could reflect either or both, and we cannot disentangle them at \(n=17\). Cohort effects are real --- our sample drew from the [anonymized institution] Bangladeshi Students Association network, a community whose default cultural reference points may differ from the general U.S. undergraduate population. Only DALL$\cdot$E~3 was tested at stage 1. We did not control for AI-generated image polish as a confound --- the gender split argues against pure quality-driven preference, but does not rule it out. The pre-registered replication (\(n=120\), three models --- DALL$\cdot$E~3, Midjourney v6, Stable Diffusion XL --- balanced cells across gender and discipline) addresses each of these.
 
 % ============================================================================
 \section{The empirical case for stage 4: LAION-Aesthetics as a deployed RAR pipeline}
@@ -225,7 +216,7 @@ We sample \(N\) images from LAION-Aesthetics V2 (high aesthetic-score subset, th
 
 If H1 holds, the human-mediated curation pipeline that produced the training data for Stable Diffusion v1.5 is amplifying the same biases the resulting model produces. \textbf{This has not been measured before.} If H1 fails, RAR's stage 4 is incorrect for the LAION-Aesthetics instance specifically; other curation pipelines (Pinterest scrapes, RLHF reward training data, Twitter image embeddings) remain to be tested. Both outcomes are publishable.
 
-\textbf{What is and is not in this paper.} This paper presents the framework and the methodology. The LAION analysis pipeline is open-source and runnable, but the empirical result --- the actual H1/H2/H3 outcomes against current LAION-Aesthetics V2 ---  is in active execution and reported in the companion artifact \cite{rar2026companion}. We deliberately separate the framework paper (this one) from the empirical-results paper to allow each to be evaluated on its own contribution: the framework's coherence and lineage-differentiation here, the empirical findings there. Reviewers concerned that ``the LAION result is not in this PDF'' are correct; the framework's claim is that this is the first instance for which the loop \emph{can} be measured this way, not that we have measured it. We treat that as a contribution because no prior work has named LAION-Aesthetics as a deployed RAR pipeline or proposed an audit methodology for it.
+\textbf{What is and is not in this paper.} This paper presents the framework and the methodology. The LAION analysis pipeline is open-source and runnable, but the empirical result --- the actual H1/H2/H3 outcomes against current LAION-Aesthetics V2 ---  is in active execution and reported in the companion artifact \cite{anonCompanion}. We deliberately separate the framework paper (this one) from the empirical-results paper to allow each to be evaluated on its own contribution: the framework's coherence and lineage-differentiation here, the empirical findings there. Reviewers concerned that ``the LAION result is not in this PDF'' are correct; the framework's claim is that this is the first instance for which the loop \emph{can} be measured this way, not that we have measured it. We treat that as a contribution because no prior work has named LAION-Aesthetics as a deployed RAR pipeline or proposed an audit methodology for it.
 
 % ============================================================================
 \section{The metaphor: stochastic mirrors}
@@ -293,15 +284,15 @@ We invite the field to test, refine, or refute RAR at each of its four stages. W
 We use the CRediT taxonomy~\cite{credit2014}.
 
 \begin{itemize}\itemsep0pt
-  \item \textbf{P.A.P.} --- Conceptualization (lead); Formal analysis (lead, pilot statistics); Methodology (lead, RAR framework, Stage-4 LAION audit design); Software (LAION analysis pipeline); Visualization (RAR loop diagram); Writing --- original draft (lead); Writing --- review \& editing.
-  \item \textbf{A.N.} --- Conceptualization (supporting); Investigation (lead, pilot survey design and recruitment); Data curation (lead, pilot stimulus generation and qualitative coding); Formal analysis (supporting); Writing --- review \& editing.
-  \item \textbf{A.H.} --- [TODO: confirm role with Antardip --- candidate roles include Methodology (Stage-4 audit), Software (LAION pipeline), Validation (replication design), Writing --- review \& editing].
+  \item \textbf{Author 1} --- Conceptualization (lead); Formal analysis (lead, pilot statistics); Methodology (lead, RAR framework, Stage-4 LAION audit design); Software (LAION analysis pipeline); Visualization (RAR loop diagram); Writing --- original draft (lead); Writing --- review \& editing.
+  \item \textbf{Author 2} --- Conceptualization (supporting); Investigation (lead, pilot survey design and recruitment); Data curation (lead, pilot stimulus generation and qualitative coding); Formal analysis (supporting); Writing --- review \& editing.
+  \item \textbf{Author 3} --- [TODO: confirm role with Antardip --- candidate roles include Methodology (Stage-4 audit), Software (LAION pipeline), Validation (replication design), Writing --- review \& editing].
 \end{itemize}
 
-The pilot DALL$\cdot$E outputs were independently coded by P.A.P.\ and A.N.\ with 100\% inter-annotator agreement. A.H.\ joined for the v2 program; the pilot annotation history is preserved as 2-author.
+The pilot DALL$\cdot$E outputs were independently coded by Author 1\ and Author 2\ with 100\% inter-annotator agreement. Author 3\ joined for the v2 program; the pilot annotation history is preserved as 2-author.
 
 \begin{acks}
-This work began as an undergraduate symposium poster (MGRS 2026). Conversations with Dr.\ Fayeq Jeelani Syed (University of Toledo) and Dr.\ Abu Saleh Musa Miah (BAUST) shaped the early framing.
+Anonymized for double-blind review.
 \end{acks}
 
 % ============================================================================

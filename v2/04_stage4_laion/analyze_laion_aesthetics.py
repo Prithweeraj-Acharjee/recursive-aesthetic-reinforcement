@@ -134,17 +134,35 @@ def caption_matches(caption: str, regex: str) -> bool:
     return bool(re.search(regex, caption, flags=re.IGNORECASE))
 
 
-def stream_samples(
+# Field-name candidates — different LAION subsets use different schemas.
+# Tried in order; first non-empty wins.
+CAPTION_FIELDS = ("TEXT", "caption", "text", "caption_lower", "original_caption", "title")
+URL_FIELDS = ("URL", "url", "image_url")
+SCORE_FIELDS = ("AESTHETIC_SCORE", "aesthetic", "aesthetic_score", "score")
+
+
+def _first_field(row: dict, fields: tuple[str, ...]):
+    for f in fields:
+        v = row.get(f)
+        if v not in (None, ""):
+            return v
+    return None
+
+
+def stream_samples_multi(
     dataset_id: str,
-    occupation: str,
-    occ_regex: str,
-    target_n: int,
+    occupation_specs: list[tuple[str, str]],   # [(canonical, regex), ...]
+    target_n_per_occ: int,
     *,
     aesthetic_min: float | None = None,
     hf_token: str | None = None,
-) -> Iterable[Sample]:
-    """Stream from the given LAION subset, yielding Samples that match the
-    occupation regex (and the aesthetic threshold if given)."""
+    scan_cap: int = 250_000,
+) -> dict[str, list[Sample]]:
+    """Stream the dataset ONCE and bucket matches into per-occupation lists.
+
+    Much faster than re-streaming per occupation — for N occupations we save
+    ~N× streaming cost. Stops early if all buckets fill or scan_cap hit.
+    """
     datasets = _required("datasets")
     ds = datasets.load_dataset(
         dataset_id,
@@ -153,42 +171,57 @@ def stream_samples(
         token=hf_token,
     )
 
-    yielded = 0
+    buckets: dict[str, list[Sample]] = {c: [] for c, _ in occupation_specs}
     seen = 0
+    schema_printed = False
+
     for row in ds:
         seen += 1
-        caption = (row.get("TEXT") or row.get("caption") or "").strip()
+        if not schema_printed:
+            sys.stderr.write(f"  [schema] {dataset_id} cols: {list(row.keys())[:18]}\n")
+            schema_printed = True
+
+        caption = (_first_field(row, CAPTION_FIELDS) or "").strip()
         if not caption:
             continue
-        if not caption_matches(caption, occ_regex):
-            continue
-        score = row.get("AESTHETIC_SCORE") or row.get("aesthetic")
+        score = _first_field(row, SCORE_FIELDS)
         if aesthetic_min is not None:
             if score is None or score < aesthetic_min:
                 continue
-        url = row.get("URL") or row.get("url")
+        url = _first_field(row, URL_FIELDS)
         if not url:
             continue
 
-        yield Sample(
-            occupation=occupation,
-            subset=("baseline" if aesthetic_min is None
-                    else f"aesthetics-{aesthetic_min}"),
-            image_url=url,
-            caption=caption,
-            aesthetic_score=score,
-        )
-        yielded += 1
-        if yielded >= target_n:
-            return
+        for canonical, regex in occupation_specs:
+            if len(buckets[canonical]) >= target_n_per_occ:
+                continue
+            if caption_matches(caption, regex):
+                buckets[canonical].append(Sample(
+                    occupation=canonical,
+                    subset=("baseline" if aesthetic_min is None
+                            else f"aesthetics-{aesthetic_min}"),
+                    image_url=url,
+                    caption=caption,
+                    aesthetic_score=score,
+                ))
+                break  # one row → one bucket max
 
-        # Safety: don't iterate forever scanning for matches.
-        if seen > target_n * 200:
-            sys.stderr.write(
-                f"[{occupation}] gave up after scanning {seen} rows; "
-                f"yielded {yielded}/{target_n}.\n"
-            )
-            return
+        if all(len(b) >= target_n_per_occ for b in buckets.values()):
+            sys.stderr.write(f"  [done] all buckets full at {seen} rows scanned\n")
+            return buckets
+
+        if seen >= scan_cap:
+            fills = ", ".join(f"{c}={len(b)}/{target_n_per_occ}"
+                              for c, b in buckets.items())
+            sys.stderr.write(f"  [cap] scan_cap {scan_cap} hit. {fills}\n")
+            return buckets
+
+    return buckets
+
+
+def caption_matches(caption: str, regex: str) -> bool:
+    """Does this caption contain the occupation? Case-insensitive."""
+    return bool(re.search(regex, caption, flags=re.IGNORECASE))
 
 
 # -----------------------------------------------------------------------------
@@ -264,8 +297,12 @@ def compute_aesthetic_features(samples: list[Sample]) -> None:
 def test_h1_demographic(
     baseline: list[Sample], filtered: list[Sample]
 ) -> tuple[float | None, float | None]:
-    """χ² of perceived gender distribution. Returns (p, Cramér's V)."""
-    scipy = _required("scipy")
+    """χ² of perceived gender distribution. Returns (p, Cramér's V).
+
+    Robust against tiny / single-category samples — returns (None, None)
+    instead of crashing when chi-square's preconditions aren't met.
+    """
+    _required("scipy")
     from scipy.stats import chi2_contingency
 
     b_g = Counter(s.perceived_gender for s in baseline if s.perceived_gender)
@@ -274,13 +311,22 @@ def test_h1_demographic(
         return None, None
 
     labels = sorted(set(b_g) | set(f_g))
+    if len(labels) < 2:
+        return None, None  # need at least 2 categories
+
     table = [
         [b_g.get(l, 0) for l in labels],
         [f_g.get(l, 0) for l in labels],
     ]
-    chi2, p, dof, _ = chi2_contingency(table)
+    try:
+        chi2, p, _, _ = chi2_contingency(table)
+    except ValueError:
+        return None, None  # all-zero rows / cols
     n = sum(b_g.values()) + sum(f_g.values())
-    cramers_v = (chi2 / (n * (min(len(table), len(labels)) - 1))) ** 0.5
+    denom = n * max(1, min(len(table), len(labels)) - 1)
+    if denom == 0:
+        return p, None
+    cramers_v = (chi2 / denom) ** 0.5
     return p, cramers_v
 
 
@@ -289,12 +335,15 @@ def test_h2_aesthetic_variance(
 ) -> float | None:
     """Ratio of filtered:baseline color-histogram variance. <1 = narrower."""
     np = _required("numpy")
-    b_hist = [s.color_hist for s in baseline if s.color_hist is not None]
-    f_hist = [s.color_hist for s in filtered if s.color_hist is not None]
+    b_hist = [s.color_hist for s in baseline if s.color_hist]
+    f_hist = [s.color_hist for s in filtered if s.color_hist]
     if not b_hist or not f_hist:
         return None
-    b_var = float(np.var(np.asarray(b_hist), axis=0).mean())
-    f_var = float(np.var(np.asarray(f_hist), axis=0).mean())
+    try:
+        b_var = float(np.var(np.asarray(b_hist), axis=0).mean())
+        f_var = float(np.var(np.asarray(f_hist), axis=0).mean())
+    except Exception:
+        return None
     if b_var == 0:
         return None
     return f_var / b_var

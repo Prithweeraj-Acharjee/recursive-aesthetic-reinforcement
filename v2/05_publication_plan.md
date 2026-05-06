@@ -8,7 +8,7 @@ This document fixes *where* the work lands and *when*. Every other artifact in t
 |---|---|---|---|---|
 | **P1** | *Stochastic Mirrors* — framework + pilot + LAION stage-4 | **AIES 2027** (deadline ~Jan 2027) OR **arXiv-as-position-paper** (any time) | Q4 2026 | drafted (`01_paper_draft.md`) |
 | **P2** | Pre-registered RAR replication (n=120, 3 models, behavioral intent) | **ACM FAccT 2027** main track (deadline ~Sep 2026 for 2027 cycle) | Q3 2026 | pre-registered (`02_pre_registration.md`); needs IRB + data |
-| **P3** | RAR generalization beyond images (LLM completions, voice agents, code) | **ACM FAccT 2028** OR **CHI 2028** | Q4 2027 | sketched only |
+| **P3** | RAR generalization beyond images (LLM completions, recsys curation, code) | **ACM FAccT 2028** OR **CHI 2028** | Q4 2027 | sketched only |
 
 ## Why this ordering
 
@@ -96,6 +96,6 @@ Total publication budget on top of the $2,000–$3,000 for the empirical work: *
 - "Stochastic mirrors" used as vocabulary in at least 5 other papers.
 - One major-press feature mentioning the work.
 - Porag and Nowshin both have a publication that helps with grad school / industry interviews.
-- The mobile-agent project (the other Porag thread) cites this paper in its design rationale.
+- The framework is cited by 2+ unrelated research threads in adjacent fields (recsys, HCI, alignment) — independent uptake, not self-cite.
 
 That's the bar. It's achievable. None of it requires luck — only the work shipping.

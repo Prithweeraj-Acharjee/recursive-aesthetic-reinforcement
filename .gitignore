@@ -1,0 +1,39 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+main.pdf
+
+# Office lock / temp files
+~$*
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editors
+.vscode/
+.idea/
+
+# Stage-4 analysis outputs (large, regeneratable)
+v2/04_stage4_laion/results/
+v2/04_stage4_laion/results_*/
+*.csv
+
+# Keep the source CSV templates and small data
+!v1/annotation_template.csv

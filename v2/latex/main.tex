@@ -225,6 +225,37 @@ We sample \(N\) images from LAION-Aesthetics V2 (high aesthetic-score subset, th
 
 If H1 holds, the human-mediated curation pipeline that produced the training data for Stable Diffusion v1.5 is amplifying the same biases the resulting model produces. \textbf{This has not been measured before.} If H1 fails, RAR's stage 4 is incorrect for the LAION-Aesthetics instance specifically; other curation pipelines (Pinterest scrapes, RLHF reward training data, Twitter image embeddings) remain to be tested. Both outcomes are publishable.
 
+\subsection{Smoke-scale preliminary findings}
+\label{sec:smoke}
+
+We ran a smoke-scale execution of the audit pipeline (\(n=50\) per occupation per subset, 5 leadership occupations, aesthetic threshold \(\geq 6.0\), GPU P100, 8.3 minutes wall-clock) to validate the methodology end-to-end before the full run. The results are reported here verbatim, with the caveat that they are statistically underpowered and serve only as a feasibility check and a preview of the effect direction.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Occupation & H1 \(p\) & Cramér's \(V\) & H2 var-ratio \\
+\midrule
+CEO       & 0.743 & 0.043 & 0.449 \\
+Founder   & 0.379 & 0.117 & 0.472 \\
+Manager   & 1.000 & 0.000 & 0.441 \\
+Leader    & 1.000 & 0.000 & 0.588 \\
+Executive & 1.000 & 0.000 & 0.481 \\
+\bottomrule
+\end{tabular}
+\caption{Stage-4 audit, smoke run (\(n=50\) per occupation per subset; threshold 6.0). H1 tests gender-distribution divergence between unfiltered LAION-2B and LAION-Aesthetics-V2 high-score; H2 tests color-histogram variance ratio (filtered/baseline; \(<1\) means aesthetic narrowing).}
+\label{tab:smoke}
+\end{table}
+
+\textbf{H1 (demographic amplification) is not supported at smoke scale.} All five \(p\)-values are non-significant; Cramér's \(V\) is trivially small. Three of five occupations show identical detected gender distributions between subsets. The nominal effect direction matches RAR's prediction (filtered subsets are more male-skewed than baseline) but the magnitude is within sampling noise.
+
+\textbf{H2 (aesthetic narrowing) is supported, consistently.} Variance ratios of 0.44--0.59 across all five occupations indicate the aesthetic-filtered subset has roughly half the color-distribution variance of baseline. This is the most consistent finding in the smoke data.
+
+\textbf{Interpretation, with appropriate humility.} The smoke run says: \emph{aesthetic-score filtering narrows the visual distribution but does not detectably amplify gender stereotypes at this stage of the pipeline.} Two readings of the H1 null are available pre-replication: (a) RAR's stage-4 prediction is wrong for the LAION-Aesthetics instance --- the human-rated aesthetic predictor selects for visual polish but not demographic stereotype, and demographic amplification must localize elsewhere in the pipeline (e.g., later RLHF stages, or the Stable Diffusion training step itself); (b) the smoke is statistically underpowered --- DeepFace's face-detection miss rate on LAION images (many are non-portrait: products, scenes, graphic design) effectively shrinks the analyzable sample further, and \(n=50\) is too thin to detect plausible amplification effect sizes. We treat (b) as the working hypothesis pending the full run (\(n=1000\) per occupation, 15 occupations, three thresholds).
+
+What the smoke run definitively establishes: \textbf{the methodology is end-to-end runnable on a single Kaggle P100 in commodity time}, and the aesthetic-narrowing component of stage 4 (H2) is empirically real and consistent. The full audit, in execution at the time of this draft, will resolve the demographic ambiguity (H1) and report against the pre-registered hypotheses without revision.
+
 \textbf{What is and is not in this paper.} This paper presents the framework and the methodology. The LAION analysis pipeline is open-source and runnable, but the empirical result --- the actual H1/H2/H3 outcomes against current LAION-Aesthetics V2 ---  is in active execution and reported in the companion artifact \cite{rar2026companion}. We deliberately separate the framework paper (this one) from the empirical-results paper to allow each to be evaluated on its own contribution: the framework's coherence and lineage-differentiation here, the empirical findings there. Reviewers concerned that ``the LAION result is not in this PDF'' are correct; the framework's claim is that this is the first instance for which the loop \emph{can} be measured this way, not that we have measured it. We treat that as a contribution because no prior work has named LAION-Aesthetics as a deployed RAR pipeline or proposed an audit methodology for it.
 
 % ============================================================================

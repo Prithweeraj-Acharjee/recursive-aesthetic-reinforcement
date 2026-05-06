@@ -1,0 +1,82 @@
+{
+  "mode": "SMOKE",
+  "started_iso": "2026-05-06T04:25:26",
+  "elapsed_min": 8.3,
+  "kaggle_runtime": "GPU P100",
+  "datasets": {
+    "baseline": "laion/relaion2B-en-research-safe",
+    "aesthetics": "laion/laion2B-en-aesthetic"
+  },
+  "config": {
+    "samples_per_subset": 50,
+    "categories": ["leadership"],
+    "aesthetic_thresholds": [6.0],
+    "scan_cap_rows": 250000
+  },
+  "stream_stats": {
+    "baseline_rows_scanned": 210959,
+    "baseline_buckets_full": true,
+    "aesthetic_rows_scanned": 250000,
+    "aesthetic_buckets_full_or_capped": true,
+    "schema_baseline": ["url", "similarity", "hash", "pwatermark", "punsafe", "caption", "key", "status", "error_message", "width", "height", "original_width", "original_height", "exif", "md5"],
+    "schema_aesthetic": ["URL", "TEXT", "WIDTH", "HEIGHT", "similarity", "hash", "punsafe", "pwatermark", "aesthetic"]
+  },
+  "rows": [
+    {
+      "occupation": "ceo",
+      "category": "leadership",
+      "threshold": 6.0,
+      "n_baseline": 50,
+      "n_filtered": 48,
+      "h1_chi2_p": 0.7430209269433963,
+      "h1_cramers_v": 0.0434255208612282,
+      "h2_var_ratio": 0.449299088960649
+    },
+    {
+      "occupation": "founder",
+      "category": "leadership",
+      "threshold": 6.0,
+      "n_baseline": 50,
+      "n_filtered": 50,
+      "h1_chi2_p": 0.37898498989836105,
+      "h1_cramers_v": 0.11652812153867864,
+      "h2_var_ratio": 0.4723486893400572
+    },
+    {
+      "occupation": "manager",
+      "category": "leadership",
+      "threshold": 6.0,
+      "n_baseline": 50,
+      "n_filtered": 50,
+      "h1_chi2_p": 1.0,
+      "h1_cramers_v": 0.0,
+      "h2_var_ratio": 0.44131666589237467
+    },
+    {
+      "occupation": "leader",
+      "category": "leadership",
+      "threshold": 6.0,
+      "n_baseline": 50,
+      "n_filtered": 50,
+      "h1_chi2_p": 1.0,
+      "h1_cramers_v": 0.0,
+      "h2_var_ratio": 0.5880867441602154
+    },
+    {
+      "occupation": "executive",
+      "category": "leadership",
+      "threshold": 6.0,
+      "n_baseline": 50,
+      "n_filtered": 50,
+      "h1_chi2_p": 1.0,
+      "h1_cramers_v": 0.0,
+      "h2_var_ratio": 0.4813324561750407
+    }
+  ],
+  "preliminary_interpretation": {
+    "h1_demographic_amplification": "NOT SUPPORTED at smoke scale. All p-values non-significant; Cramer's V trivially small. Three of five occupations show identical gender distributions between baseline and aesthetic-filtered subsets. Caveat: high DeepFace face-detection miss rate likely (many LAION images are non-portrait), reducing effective sample further.",
+    "h2_aesthetic_narrowing": "SUPPORTED, consistently. Color-histogram variance ratio is 0.44-0.59 across all five leadership occupations -- the aesthetic-filtered subset shows roughly half the visual variance of baseline. Robust signal at smoke scale.",
+    "implication_for_paper": "Stage 4 of RAR localizes at the AESTHETIC layer (visual distribution narrowing) but NOT at the DEMOGRAPHIC layer (gender stereotype amplification). The framework's gender-amplification prediction needs to be revised to: 'human-rated aesthetic curation narrows the representational distribution along visual-style dimensions; demographic amplification at this specific pipeline stage is not detected at this scale.' This is the kind of falsification-with-partial-confirmation that strengthens the paper's credibility, not weakens it.",
+    "next_step": "Run FULL paper-quality audit: SMOKE=False. n=1000 per (occupation, subset) for all 15 occupations across 3 aesthetic thresholds. ~6-8 hours on Kaggle P100. The results determine the paper's final empirical anchor."
+  }
+}

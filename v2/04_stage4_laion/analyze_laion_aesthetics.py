@@ -157,11 +157,12 @@ def stream_samples_multi(
     aesthetic_min: float | None = None,
     hf_token: str | None = None,
     scan_cap: int = 250_000,
-) -> dict[str, list[Sample]]:
+) -> tuple[dict[str, list[Sample]], int]:
     """Stream the dataset ONCE and bucket matches into per-occupation lists.
 
     Much faster than re-streaming per occupation — for N occupations we save
     ~N× streaming cost. Stops early if all buckets fill or scan_cap hit.
+    Returns ``(buckets, rows_scanned)``.
     """
     datasets = _required("datasets")
     ds = datasets.load_dataset(
@@ -208,15 +209,15 @@ def stream_samples_multi(
 
         if all(len(b) >= target_n_per_occ for b in buckets.values()):
             sys.stderr.write(f"  [done] all buckets full at {seen} rows scanned\n")
-            return buckets
+            return buckets, seen
 
         if seen >= scan_cap:
             fills = ", ".join(f"{c}={len(b)}/{target_n_per_occ}"
                               for c, b in buckets.items())
             sys.stderr.write(f"  [cap] scan_cap {scan_cap} hit. {fills}\n")
-            return buckets
+            return buckets, seen
 
-    return buckets
+    return buckets, seen
 
 
 def caption_matches(caption: str, regex: str) -> bool:

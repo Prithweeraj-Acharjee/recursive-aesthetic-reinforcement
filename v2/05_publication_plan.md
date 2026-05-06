@@ -54,7 +54,7 @@ The Stochastic Parrots template:
 
 ## Co-author and advisor strategy
 
-- **Afroza Nowshin** is co-author on all three papers. Decide co-first-author order per paper based on contribution. Default: alphabetical (Acharjee, Nowshin) for P1; primary contributor for P2/P3.
+- **Afroza Nowshin** and **Antardip Himel** are co-authors on the v2 program. Co-author order is currently: Acharjee Porag (first), Nowshin (second), Himel (third). Decide co-first-author conventions per paper based on contribution. Default for P1: keep the current order. For P2 and P3, revisit based on who carries which workstream (replication recruitment + analysis vs. LAION pipeline vs. theory drafting).
 - **Recommended faculty co-author for P2/P3:** approach Dr. Fayeq Jeelani Syed (UToledo) and/or Dr. Abu Saleh Musa Miah (BAUST) — both already cited as research mentors on Porag's resume. Faculty co-authorship (a) helps with venue acceptance, (b) provides IRB cover, (c) opens grant routes.
 - **Cold outreach (post-arXiv preprint of P1):** send a 4-paragraph email to Sasha Luccioni (HF, Stable Bias author), Margaret Mitchell (HF, foundational bias work), Patrick Schramowski (Fair Diffusion). Ask for *feedback*, not endorsement. Researchers respond to specific, non-flattering, non-asking emails.
 

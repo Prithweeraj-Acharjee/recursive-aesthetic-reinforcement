@@ -48,7 +48,14 @@
   \city{Toledo}\state{OH}\country{USA}
 }
 
-\renewcommand{\shortauthors}{Acharjee Porag and Nowshin}
+\author{Antardip Himel}
+\affiliation{%
+  \institution{University of Toledo}
+  \city{Toledo}\state{OH}\country{USA}
+}
+% TODO: confirm Antardip's preferred contact email and add \email{...} here.
+
+\renewcommand{\shortauthors}{Acharjee Porag, Nowshin, and Himel}
 
 \begin{document}
 
@@ -138,7 +145,7 @@ The full loop is closed when \(M_{t+1}\) trained on \(C'\) produces stage-1 outp
 
 We summarize the pilot here; full materials, including raw images and survey instruments, are in the supplementary materials.
 
-\textbf{Stage 1 --- DALL$\cdot$E~3 outputs.} We submitted ten neutral occupational prompts (``A CEO,'' ``A nurse,'' ``A teacher,'' etc.) to DALL$\cdot$E~3 via ChatGPT, generating two images per prompt for 20 total. Both authors independently coded each image for perceived gender, race, attire, and setting; inter-annotator agreement was 100\%. \textbf{All five leadership prompts (CEO, Founder, Manager, Leader, Executive) produced male-coded, white-presenting subjects in business attire in office or boardroom settings, with zero exceptions across all 10 images. All five care/service prompts (Nurse, Teacher, Caregiver, Receptionist, Social Worker) produced female-coded subjects, with zero exceptions across all 10 images.} This replicates Bianchi et al.~\cite{bianchi2023easily} and Luccioni et al.~\cite{luccioni2023stable} on a smaller sample.
+\textbf{Stage 1 --- DALL$\cdot$E~3 outputs.} We submitted ten neutral occupational prompts (``A CEO,'' ``A nurse,'' ``A teacher,'' etc.) to DALL$\cdot$E~3 via ChatGPT, generating two images per prompt for 20 total. The first two authors (P.A.P. and A.N.) independently coded each image for perceived gender, race, attire, and setting; inter-annotator agreement was 100\%. \textbf{All five leadership prompts (CEO, Founder, Manager, Leader, Executive) produced male-coded, white-presenting subjects in business attire in office or boardroom settings, with zero exceptions across all 10 images. All five care/service prompts (Nurse, Teacher, Caregiver, Receptionist, Social Worker) produced female-coded subjects, with zero exceptions across all 10 images.} This replicates Bianchi et al.~\cite{bianchi2023easily} and Luccioni et al.~\cite{luccioni2023stable} on a smaller sample.
 
 \textbf{Stage 2 --- Forced-choice recognition.} Seventeen participants completed a survey in which each saw the DALL$\cdot$E default for a given role alongside three diverse stock-photo alternatives, randomized in order. The question: \emph{which best represents this role?} Chance is 25\%. Overall, participants chose the DALL$\cdot$E default 37\% of the time (\(p=.004\), two-tailed binomial against chance). For CEO, 71\% (\(p=.0001\), \(\mathrm{OR}=7.20\)). For Nurse, 59\% (\(p=.003\)). Both survive Bonferroni correction across the nine tested occupations.
 

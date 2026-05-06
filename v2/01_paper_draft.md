@@ -1,6 +1,6 @@
 # We Are Trapped in RAR: How Human Selection Hardens Generative AI Bias
 
-**Prithweeraj Acharjee Porag** ¹ · **Afroza Nowshin** ¹
+**Prithweeraj Acharjee Porag** ¹ · **Afroza Nowshin** ¹ · **Antardip Himel** ¹
 
 ¹ Department of EECS, University of Toledo
 
@@ -179,7 +179,7 @@ This work began as an undergraduate symposium poster. Conversations with Dr. Fay
 
 ## Author contributions
 
-P.A.P. led conceptualization, statistical analysis, and drafting. A.N. led survey design, participant recruitment, and qualitative coding. Both authors coded the DALL·E outputs independently and reconciled to 100% agreement.
+P.A.P. led conceptualization, statistical analysis, and drafting (pilot and v2). A.N. led survey design, participant recruitment, and qualitative coding for the pilot. A.H. joined for the v2 program; specific contributions [TODO — fill in once roles are settled, e.g. LAION analysis, replication design, or paper revision]. The pilot's DALL·E outputs were coded independently by P.A.P. and A.N. and reconciled to 100% agreement.
 
 ## Data and materials availability
 

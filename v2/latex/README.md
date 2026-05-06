@@ -51,7 +51,7 @@ If you don't have a TeX distribution: install **TeX Live** (https://www.tug.org/
 
 - 10-section ACM SIGCONF paper structure
 - Title: *We Are Trapped in RAR: How Human Selection Hardens Generative AI Bias*
-- Co-authored: Acharjee Porag & Nowshin
+- Co-authored: Acharjee Porag, Nowshin & Himel
 - Abstract leads with the visceral "every time you choose the AI's default, you cast a vote" framing
 - Section 1 epigraph ("the model works exactly as intended, and what it does is shrink the space of seeable images")
 - Sections 2–8 carry the framework + pilot data + LAION methodology

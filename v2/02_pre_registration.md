@@ -2,7 +2,7 @@
 
 **Title.** Recursive Aesthetic Reinforcement: A Pre-Registered Replication and Extension of Demographic Stereotype Amplification in Text-to-Image Models.
 
-**Authors.** Prithweeraj Acharjee Porag¹, Afroza Nowshin¹.
+**Authors.** Prithweeraj Acharjee Porag¹, Afroza Nowshin¹, Antardip Himel¹.
 
 ¹ Department of EECS, University of Toledo.
 
@@ -14,7 +14,7 @@
 
 ## 1. Hypotheses (pre-registered)
 
-We pre-register confirmatory tests of the following hypotheses, derived from the pilot study (Acharjee & Nowshin, MGRS 2026 poster).
+We pre-register confirmatory tests of the following hypotheses, derived from the pilot study (Acharjee Porag & Nowshin, MGRS 2026 poster — Himel joins as third author for the v2 program).
 
 **Primary:**
 

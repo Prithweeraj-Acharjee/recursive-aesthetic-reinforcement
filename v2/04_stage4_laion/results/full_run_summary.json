@@ -1,0 +1,88 @@
+{
+  "mode": "FULL",
+  "started_iso": "2026-05-06T04:43:53",
+  "elapsed_min": 333.3,
+  "kaggle_runtime": "GPU P100 (Kaggle saved version)",
+  "datasets": {
+    "baseline": "laion/relaion2B-en-research-safe",
+    "aesthetics": "laion/laion2B-en-aesthetic"
+  },
+  "config": {
+    "samples_per_subset": 500,
+    "categories": ["leadership", "care", "stem"],
+    "aesthetic_thresholds": [5.0, 6.0, 6.5],
+    "scan_cap_rows": 2500000
+  },
+  "stream_stats": {
+    "leadership_baseline_rows_scanned": 2017842,
+    "leadership_baseline_buckets_full": true,
+    "leadership_aesthetic_rows_per_threshold": 2332681,
+    "care_baseline_rows_scanned": 2500000,
+    "care_baseline_partial_fills": {"caregiver": 133, "receptionist": 48, "social_worker": 51, "nurse": 500, "teacher": 500},
+    "care_aesthetic_partial_fills": {"caregiver": 170, "receptionist": 12, "social_worker": 18, "nurse": 500, "teacher": 500},
+    "stem_baseline_rows_scanned": 2500000,
+    "stem_baseline_partial_fills": {"scientist": 327, "engineer": 500, "doctor": 500, "researcher": 81, "programmer": 157},
+    "stem_aesthetic_partial_fills": {"scientist": 305, "engineer": 500, "doctor": 500, "researcher": 58, "programmer": 19}
+  },
+  "rows": [
+    {"occupation": "ceo",       "category": "leadership", "threshold": 5.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 1.0,                 "h1_cramers_v": 0.0,                  "h2_var_ratio": 0.7568579672262595},
+    {"occupation": "founder",   "category": "leadership", "threshold": 5.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.28589691202477185, "h1_cramers_v": 0.04248320509612754,  "h2_var_ratio": 0.5672087948756468},
+    {"occupation": "manager",   "category": "leadership", "threshold": 5.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.044167985230549316,"h1_cramers_v": 0.07763360607220277,  "h2_var_ratio": 0.557064475114512},
+    {"occupation": "leader",    "category": "leadership", "threshold": 5.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.0007098935181571899,"h1_cramers_v": 0.13279923227484697, "h2_var_ratio": 0.6719125663471012},
+    {"occupation": "executive", "category": "leadership", "threshold": 5.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.08179930909382488, "h1_cramers_v": 0.07058011283480477,  "h2_var_ratio": 0.5222151160166593},
+
+    {"occupation": "ceo",       "category": "leadership", "threshold": 6.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 1.0,                 "h1_cramers_v": 0.0,                  "h2_var_ratio": 0.7564948926204076},
+    {"occupation": "founder",   "category": "leadership", "threshold": 6.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.27990889351985215, "h1_cramers_v": 0.04304910765344758,  "h2_var_ratio": 0.5685040543502533},
+    {"occupation": "manager",   "category": "leadership", "threshold": 6.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.044167985230549316,"h1_cramers_v": 0.07763360607220277,  "h2_var_ratio": 0.5570757538313117},
+    {"occupation": "leader",    "category": "leadership", "threshold": 6.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.0007098935181571899,"h1_cramers_v": 0.13279923227484697, "h2_var_ratio": 0.6719366266198197},
+    {"occupation": "executive", "category": "leadership", "threshold": 6.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.08179930909382488, "h1_cramers_v": 0.07058011283480477,  "h2_var_ratio": 0.5190122139760273},
+
+    {"occupation": "ceo",       "category": "leadership", "threshold": 6.5, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 1.0,                 "h1_cramers_v": 0.0,                  "h2_var_ratio": 0.7565450088892013},
+    {"occupation": "founder",   "category": "leadership", "threshold": 6.5, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.2739864884398023,  "h1_cramers_v": 0.0436177720233359,   "h2_var_ratio": 0.5678526631385854},
+    {"occupation": "manager",   "category": "leadership", "threshold": 6.5, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.044167985230549316,"h1_cramers_v": 0.07763360607220277,  "h2_var_ratio": 0.5570757538313117},
+    {"occupation": "leader",    "category": "leadership", "threshold": 6.5, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.0007098935181571899,"h1_cramers_v": 0.13279923227484697, "h2_var_ratio": 0.6717833221235259},
+    {"occupation": "executive", "category": "leadership", "threshold": 6.5, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.08179930909382488, "h1_cramers_v": 0.07058011283480477,  "h2_var_ratio": 0.5191614483113592},
+
+    {"occupation": "nurse",         "category": "care", "threshold": 5.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.00015713072215057437,"h1_cramers_v": 0.14204307470087965, "h2_var_ratio": 0.922010295895241},
+    {"occupation": "teacher",       "category": "care", "threshold": 5.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 1.553645687576471e-05, "h1_cramers_v": 0.16092028617726586, "h2_var_ratio": 0.5909504621193248},
+    {"occupation": "caregiver",     "category": "care", "threshold": 5.0, "n_baseline": 133, "n_filtered": 170, "h1_chi2_p": 0.7606478727325887,    "h1_cramers_v": 0.02159465707489106, "h2_var_ratio": 0.4886135043904037},
+    {"occupation": "receptionist",  "category": "care", "threshold": 5.0, "n_baseline": 48,  "n_filtered": 12,  "h1_chi2_p": 0.16428684524957246,   "h1_cramers_v": 0.20506190215895878, "h2_var_ratio": 0.9402542286051889},
+    {"occupation": "social_worker", "category": "care", "threshold": 5.0, "n_baseline": 51,  "n_filtered": 18,  "h1_chi2_p": 0.21157764052750838,   "h1_cramers_v": 0.20265333964279017, "h2_var_ratio": 0.7403938099245195},
+
+    {"occupation": "nurse",         "category": "care", "threshold": 6.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.00011007749978341684,"h1_cramers_v": 0.14533949491438816, "h2_var_ratio": 0.9225265788061634},
+    {"occupation": "teacher",       "category": "care", "threshold": 6.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 1.553645687576471e-05, "h1_cramers_v": 0.16092028617726586, "h2_var_ratio": 0.5909785211404792},
+    {"occupation": "caregiver",     "category": "care", "threshold": 6.0, "n_baseline": 133, "n_filtered": 170, "h1_chi2_p": 0.5187585610166014,    "h1_cramers_v": 0.045741284891134576,"h2_var_ratio": 0.4889199893048839},
+    {"occupation": "receptionist",  "category": "care", "threshold": 6.0, "n_baseline": 48,  "n_filtered": 12,  "h1_chi2_p": 0.16428684524957246,   "h1_cramers_v": 0.20506190215895878, "h2_var_ratio": 0.9402542286051889},
+    {"occupation": "social_worker", "category": "care", "threshold": 6.0, "n_baseline": 51,  "n_filtered": 18,  "h1_chi2_p": 0.21157764052750838,   "h1_cramers_v": 0.20265333964279017, "h2_var_ratio": 0.7403938099245195},
+
+    {"occupation": "nurse",         "category": "care", "threshold": 6.5, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.00015713072215057437,"h1_cramers_v": 0.14204307470087965, "h2_var_ratio": 0.9228057661126866},
+    {"occupation": "teacher",       "category": "care", "threshold": 6.5, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 1.4684567971969724e-05,"h1_cramers_v": 0.16149507142807293, "h2_var_ratio": 0.5922429583281396},
+    {"occupation": "caregiver",     "category": "care", "threshold": 6.5, "n_baseline": 133, "n_filtered": 170, "h1_chi2_p": 0.633159580213233,     "h1_cramers_v": 0.033833797819520194,"h2_var_ratio": 0.4888476220720574},
+    {"occupation": "receptionist",  "category": "care", "threshold": 6.5, "n_baseline": 48,  "n_filtered": 12,  "h1_chi2_p": 0.16428684524957246,   "h1_cramers_v": 0.20506190215895878, "h2_var_ratio": 0.9402542286051889},
+    {"occupation": "social_worker", "category": "care", "threshold": 6.5, "n_baseline": 51,  "n_filtered": 18,  "h1_chi2_p": 0.21157764052750838,   "h1_cramers_v": 0.20265333964279017, "h2_var_ratio": 0.7403938099245195},
+
+    {"occupation": "scientist",  "category": "stem", "threshold": 5.0, "n_baseline": 327, "n_filtered": 305, "h1_chi2_p": 1.0,                 "h1_cramers_v": 0.0,                 "h2_var_ratio": 1.0190081218317169},
+    {"occupation": "engineer",   "category": "stem", "threshold": 5.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.06654083244355675, "h1_cramers_v": 0.06749284316946898, "h2_var_ratio": 0.7595516041281137},
+    {"occupation": "doctor",     "category": "stem", "threshold": 5.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.11839782143025165, "h1_cramers_v": 0.0576765722041952,  "h2_var_ratio": 1.0777609545904694},
+    {"occupation": "researcher", "category": "stem", "threshold": 5.0, "n_baseline": 81,  "n_filtered": 58,  "h1_chi2_p": 0.2127881198570286,  "h1_cramers_v": 0.1265055710039633,  "h2_var_ratio": 0.5868365890025375},
+    {"occupation": "programmer", "category": "stem", "threshold": 5.0, "n_baseline": 157, "n_filtered": 19,  "h1_chi2_p": 1.0,                 "h1_cramers_v": 0.0,                 "h2_var_ratio": 0.969749130509608},
+
+    {"occupation": "scientist",  "category": "stem", "threshold": 6.0, "n_baseline": 327, "n_filtered": 305, "h1_chi2_p": 1.0,                 "h1_cramers_v": 0.0,                 "h2_var_ratio": 1.0190375745548184},
+    {"occupation": "engineer",   "category": "stem", "threshold": 6.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.06654083244355675, "h1_cramers_v": 0.06749284316946898, "h2_var_ratio": 0.7597863986607484},
+    {"occupation": "doctor",     "category": "stem", "threshold": 6.0, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.12115650759279144, "h1_cramers_v": 0.05720923862676397, "h2_var_ratio": 1.080086919368086},
+    {"occupation": "researcher", "category": "stem", "threshold": 6.0, "n_baseline": 81,  "n_filtered": 58,  "h1_chi2_p": 0.12378984252042856, "h1_cramers_v": 0.15626778643277003, "h2_var_ratio": 0.5869755133252924},
+    {"occupation": "programmer", "category": "stem", "threshold": 6.0, "n_baseline": 157, "n_filtered": 19,  "h1_chi2_p": 1.0,                 "h1_cramers_v": 0.0,                 "h2_var_ratio": 0.9702721150495904},
+
+    {"occupation": "scientist",  "category": "stem", "threshold": 6.5, "n_baseline": 327, "n_filtered": 305, "h1_chi2_p": 1.0,                 "h1_cramers_v": 0.0,                 "h2_var_ratio": 1.019012477959783},
+    {"occupation": "engineer",   "category": "stem", "threshold": 6.5, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.06654083244355675, "h1_cramers_v": 0.06749284316946898, "h2_var_ratio": 0.759658844881088},
+    {"occupation": "doctor",     "category": "stem", "threshold": 6.5, "n_baseline": 500, "n_filtered": 500, "h1_chi2_p": 0.14845817479882614, "h1_cramers_v": 0.05333588524746327, "h2_var_ratio": 1.0800960961195905},
+    {"occupation": "researcher", "category": "stem", "threshold": 6.5, "n_baseline": 81,  "n_filtered": 58,  "h1_chi2_p": 0.2127881198570286,  "h1_cramers_v": 0.1265055710039633,  "h2_var_ratio": 0.5869755133252924},
+    {"occupation": "programmer", "category": "stem", "threshold": 6.5, "n_baseline": 157, "n_filtered": 19,  "h1_chi2_p": 1.0,                 "h1_cramers_v": 0.0,                 "h2_var_ratio": 0.9702721150495904}
+  ],
+  "synthesis": {
+    "h1_demographic_amplification": "OCCUPATION-CONDITIONAL. 3 of 13 unique occupations show Bonferroni-significant gender redistribution (alpha=0.05/13=0.0038): teacher (p=1.5e-5, V=0.16), nurse (p=1.6e-4, V=0.14), leader (p=7.1e-4, V=0.13). One borderline at uncorrected: manager (p=0.044). All other occupations (ceo, founder, executive, scientist, doctor, engineer, researcher, programmer, caregiver, receptionist, social_worker) null. Effect is stable across thresholds 5.0/6.0/6.5 (the same baseline vs filtered comparison is preserved across thresholds because we use the SAME baseline subset against three thresholds).",
+    "h2_aesthetic_narrowing": "OCCUPATION-CONDITIONAL. Variance-narrowing (var_ratio < 0.7) for: founder, manager, leader, executive, teacher, caregiver, engineer. No narrowing or slight widening (var_ratio >= 0.9) for: ceo (~0.76), nurse (~0.92), doctor (~1.08), scientist (~1.02), programmer (~0.97). Doctor's var_ratio > 1 means filtered subset is MORE variable than baseline — a counter-prediction.",
+    "stage_zero_finding": "LAION-2B caption coverage of occupations is itself unequal. Within a 2.5M-row scan (~0.12% of LAION-2B), 'ceo'/'nurse'/'teacher' fill 500/500 buckets cleanly; 'social_worker' (51), 'receptionist' (48), 'researcher' (81), 'programmer' (157), 'caregiver' (133), 'scientist' (327) are partial. The aesthetic-filtered subset is even sparser for those rare categories. The corpus's occupational coverage is itself a stage-prior to RAR's loop and itself stereotype-shaped.",
+    "direction_TODO": "p-values and effect sizes are computed; the per-class gender Counter dicts in baseline_gender / filtered_gender (also computed and saved per-occupation CSV in /kaggle/working) determine whether the filter shifts toward or away from the dominant stereotype. Most plausible interpretation given existing literature: filter amplifies stereotypes (more-female teachers/nurses, more-male leaders) — but this should be confirmed by inspecting the CSV files, not assumed."
+  }
+}

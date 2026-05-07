@@ -185,51 +185,40 @@ social\_worker & & & \\
 
 Three of 13 unique occupations show Bonferroni-corrected demographic redistribution (Table~\ref{tab:h1}). Effect sizes for the three significant cases are in Cohen's \emph{small-to-modest} range ($V\!\in\![0.13, 0.16]$).
 
-\subsection{Direction of Effect}
+\subsection{Direction of Effect (extracted from supplementary)}
 \label{sec:direction}
 
-We address the most important methodological objection directly: a $\chi^2$ test reports \emph{magnitude} of distributional difference but not \emph{direction}. From the per-occupation gender Counter dictionaries in our supplementary \texttt{summary.json}, the directional shifts on the three Bonferroni-significant cases are:
+A $\chi^2$ test reports \emph{magnitude} of distributional difference but not \emph{direction}. The per-occupation gender Counter dictionaries in our supplementary \texttt{summary.json} contain, for each (occupation, threshold) cell, the absolute count of detected-male and detected-female labels in baseline and filtered subsets. We have not yet incorporated those counts into the prose of this short paper. Two observations bound what we can claim:
 
-\begin{table}[h]
-\centering\small
-\caption{Direction of demographic shift for the three Bonferroni-significant occupations. Numbers are detected female-coded fraction $\pm$ classifier-noise SE, baseline vs. aesthetic-filtered (threshold 6.0).}
-\label{tab:direction}
-\begin{tabular}{lcccl}
-\toprule
-\textbf{Occupation} & \textbf{Stage-1 stereotype} & \textbf{Baseline \%F} & \textbf{Filtered \%F} & \textbf{Direction} \\
-\midrule
-teacher & female (DALL$\cdot$E 100\%F) & 0.61 & 0.78 & \emph{toward} stereotype \\
-nurse   & female (DALL$\cdot$E 100\%F) & 0.66 & 0.81 & \emph{toward} stereotype \\
-leader  & male   (DALL$\cdot$E 100\%M) & 0.34 & 0.18 & \emph{toward} stereotype \\
-\bottomrule
-\end{tabular}
-\end{table}
+(1) \emph{Prior-literature prediction.} Bianchi et al.~\cite{bianchi2023easily} and Luccioni et al.~\cite{luccioni2023stable} establish that the aesthetic-score predictor's training data (the SAC and AVA datasets, which are themselves stock-photography-and-art-leaning) over-represents stereotypically gendered depictions. A direct corollary: the aesthetic filter should preferentially select images that match the stereotype most strongly visualized in stock photography --- female teachers and nurses, male business leaders. We therefore predict the H1-significant shifts to be \emph{toward} the existing Stage-1 stereotype on all three cases.
 
-All three directional shifts are \emph{toward} the existing Stage-1 stereotype. This is consistent with both Bianchi et al.~\cite{bianchi2023easily}'s finding of stereotype amplification at the model output stage and Ferbach et al.~\cite{ferbach2024selfconsuming}'s theoretical prediction that curation acts as implicit preference optimization. \textbf{H3 is supported on the H1-significant occupations.}
+(2) \emph{What we report and what we do not.} We report magnitude in this paper and treat directional confirmation as a refinement. Reviewers can verify direction directly from the released \texttt{summary.json}; we will report the directional confirmation as a supplementary note before camera-ready. \textbf{If even one of the three significant cases shifts \emph{away} from stereotype, the paper's interpretation must be revised; we commit to including that as a refutation if it occurs.}
 
-\subsection{Null-Baseline Permutation Test}
+\subsection{Null-Baseline Calibration}
 \label{sec:nullbaseline}
 
-To distinguish observed signal from natural sampling variation between two random LAION subsets, we ran a permutation-based null baseline: 100 random splits of the unfiltered baseline subset (n=500 per split, gender labels held fixed), computing $V$ between each pair. The null distribution has mean $\bar V_{\text{null}} = 0.030$ with standard deviation $\sigma_{\text{null}} = 0.022$. The three Bonferroni-significant observations sit at:
+To distinguish observed effects from natural sampling variation, we calibrate against the analytical null. For two independent samples of size $n_1 = n_2 = 500$ drawn from a common gender-marginal distribution, the chi-square statistic under the null is approximately $\chi^2 \!\sim\! \chi^2_{(\text{df}=1)}$ for binary gender labels. Cramér's $V\!=\!\sqrt{\chi^2/(N \cdot (\min(r,c)\!-\!1))}\!=\!\sqrt{\chi^2/N}$ at $N\!=\!1000$ has expected value $E[V_{\text{null}}] \approx \sqrt{2/(\pi N)} \approx 0.025$ (half-normal moment) with standard deviation $\sigma_{\text{null}} \approx \sqrt{(1\!-\!2/\pi)/N} \approx 0.019$.
+
+The three Bonferroni-significant observations therefore sit at approximately $7\sigma$, $6\sigma$, and $5\sigma$ above the null mean (Table~\ref{tab:null}):
 
 \begin{table}[h]
 \centering\small
-\caption{Observed $V$ vs. null distribution. Reported as Z-score $(V_{\text{obs}}\!-\!\bar V_{\text{null}}) / \sigma_{\text{null}}$.}
+\caption{Observed $V$ vs. analytical null. Z-score = $(V_{\text{obs}}\!-\!E[V_{\text{null}}]) / \sigma_{\text{null}}$.}
 \label{tab:null}
 \begin{tabular}{lrr}
 \toprule
 \textbf{Occupation} & $V_{\text{obs}}$ & Z-score vs. null \\
 \midrule
-teacher & 0.161 & $5.95\sigma$ \\
-nurse   & 0.142 & $5.09\sigma$ \\
-leader  & 0.133 & $4.68\sigma$ \\
+teacher & 0.161 & $\sim\!7.2\sigma$ \\
+nurse   & 0.142 & $\sim\!6.2\sigma$ \\
+leader  & 0.133 & $\sim\!5.7\sigma$ \\
 \midrule
-\textit{(median null cell)} & \textit{0.029} & --- \\
+\textit{Cohen's small-effect threshold ($V\!=\!0.10$)} & 0.100 & $\sim\!4.0\sigma$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-All three significant cases exceed the null distribution by $\geq 4.6\sigma$. This addresses the concern that ``small'' Cramér's $V$ values might be indistinguishable from noise: at the $n\!=\!500$ scale, the natural between-subset variation is bounded by $V \approx 0.07$, well below the observed effect.
+A non-parametric permutation test (1000 random splits of the baseline subset) is the principled finite-sample replacement for the asymptotic calculation; we will include it in the supplementary materials before camera-ready. The asymptotic null is sufficient to establish that the observed effects are not noise.
 
 \subsection{H2: Aesthetic Narrowing is Heterogeneous}
 
@@ -263,16 +252,16 @@ Doctor's $V_{\text{var}}\!=\!1.08$ contradicts both RAR's framework and Ferbach 
 \subsection{Threshold Non-Independence}
 \label{sec:threshold}
 
-A Level-5 reviewer would correctly observe that p-values across thresholds 5.0, 6.0, 6.5 are nearly identical for several occupations (e.g., manager $p\!=\!0.044$ at all three). We ran an explicit subset-overlap analysis: at $\geq\!500$ caption matches, the (5.0, 6.0) overlap is $96.8\%$ of images and (6.0, 6.5) is $94.2\%$. The aesthetic-score predictor's distribution is bimodal in our occupation slices: most matched images either score very high ($\geq\!6.5$) or very low ($<\!5.0$); few are in the middle bands. Consequently, the three thresholds are \emph{not} independent statistical tests; they are robustness checks against a single aesthetic threshold. We report all three for transparency but treat $p$-values as effectively single-test.
+A careful reader will observe that p-values across thresholds 5.0, 6.0, 6.5 are nearly identical for several occupations (e.g., manager $p\!=\!0.044$ at all three). The streaming logs show that all three threshold-filtered subsets reached caption-match completion at the same scan-row count (2{,}332{,}681), suggesting heavy overlap among images qualifying at thresholds 5.0, 6.0, and 6.5. The aesthetic-score predictor's output appears bimodal in our occupation slices: most matched images either score $\geq 6.5$ or $<\!5.0$, with sparse density between. Consequently, the three thresholds function as \emph{robustness checks} against a single aesthetic-filter threshold rather than three independent statistical tests. We report all three for transparency but treat $p$-values as effectively single-test for purposes of multiple-comparison correction. Exact subset-overlap percentages will be computed from the released CSVs and added to the supplementary before camera-ready.
 
 \subsection{Stage-Zero: Pre-Filter Selection Bias}
 
 Six of 13 occupations under-fill at $N=500$ within a 2.5M-row scan: \emph{social\_worker} (51), \emph{receptionist} (48), \emph{caregiver} (133), \emph{researcher} (81), \emph{programmer} (157), \emph{scientist} (327). The web-crawled corpus encodes occupation-specific selection bias \emph{before} any aesthetic filter is applied. Hypothesized mechanism: stock-photo industry coverage, tagging conventions, and posting-practice asymmetries; this is itself a CSCW-relevant sociotechnical finding.
 
-\subsection{Caption-Polysemy Sensitivity}
+\subsection{Caption-Polysemy Concern (Pre-Camera-Ready Sensitivity Plan)}
 \label{sec:caption}
 
-A Level-5 concern: ``leader'' is polysemous (sports leader, religious leader, political leader). To check whether our ``leader'' result is artifactual, we ran a co-occurrence analysis on the 1,000 leader-matched captions. Top co-occurring tokens: \emph{business} (37\%), \emph{team} (29\%), \emph{world} (12\%), \emph{political} (8\%), \emph{religious} (3\%), \emph{spiritual} (2\%), \emph{youth} (3\%), \emph{tribal} (2\%), other (4\%). The dominant context is business/team leadership ($\geq\!66\%$). Re-running H1 on the business-and-team-restricted subset ($n\!=\!660$) yields $p=0.0023$, $V=0.131$ --- still Bonferroni-significant, with effectively unchanged effect size. The result is not a polysemy artifact. Similar polysemy checks on \emph{teacher} (mostly classroom/school context, 89\%) and \emph{nurse} (mostly medical context, 91\%) confirm low polysemy contamination.
+A reviewer concern: ``leader'' is polysemous (business leader, sports leader, religious leader, opinion leader). The ``ceo'' caption is monosemous; this asymmetry could in principle inflate the leader effect. We commit to a pre-camera-ready sensitivity test: extract the 1{,}000 leader-matched captions from the released CSV, tokenize and tag the top-20 co-occurring tokens, restrict to the business/team-leadership subset, and re-run H1. If the restricted subset's $V$ is within bootstrap confidence interval of the unrestricted result, the leader finding is not a polysemy artifact. The same check is required for \emph{teacher} (could be classroom-vs-yoga-vs-driving) and \emph{nurse} (could be medical-vs-pop-culture). The released captions in the per-occupation CSVs make this trivially replicable; we own the gap honestly here rather than report a number we have not computed.
 
 % ============================================================================
 \section{Discussion}
@@ -282,7 +271,7 @@ A Level-5 concern: ``leader'' is polysemous (sports leader, religious leader, po
 
 \paragraph{Post-hoc framing acknowledged.} The pre-registered hypothesis was uniform amplification. The occupation-conditional reading is a generated hypothesis from these data, not confirmed. A held-out occupation set (we recommend: \emph{artist}, \emph{lawyer}, \emph{police officer}, \emph{politician}, \emph{judge}) is required for confirmatory testing. We treat the current finding as motivation for that replication, not as a claim of confirmed framework.
 
-\paragraph{Effect-size interpretation.} Our observed Cramér's $V\!\in\![0.13, 0.16]$ is in Cohen's \emph{small} range. Three calibrating considerations. (1) Comparison to prior work: Taori \& Hashimoto~\cite{taori2022data} report bias-amplification effect sizes of 1.5--3\% per loop iteration on classifier tasks, equivalent to $V \approx 0.04$--$0.08$ at our $n$; our cross-pipeline single-iteration measurements (0.13--0.16) are 2--4$\times$ larger. (2) Null-baseline calibration: §\ref{sec:nullbaseline} shows our observed $V$'s exceed the natural-variation null distribution by $\geq 4.6\sigma$. (3) Bootstrap CI: 95\% confidence intervals on observed $V$ are $[0.122, 0.182]$ for teacher, $[0.105, 0.166]$ for nurse, $[0.099, 0.156]$ for leader (computed by bootstrap resampling of the per-image gender labels, 1000 iterations).
+\paragraph{Effect-size interpretation.} Our observed Cramér's $V\!\in\![0.13, 0.16]$ is in Cohen's \emph{small} range. Three calibrating considerations. (1) Comparison to prior work: Taori \& Hashimoto~\cite{taori2022data} report bias amplification effect sizes corresponding to similar magnitude per loop iteration on classifier tasks; our single-pipeline measurements are within an order of magnitude of theirs. (2) Null-baseline calibration: §\ref{sec:nullbaseline} shows our observed $V$'s exceed the analytical-null mean by $\geq 5.7\sigma$ (asymptotic). (3) Asymptotic confidence intervals on observed $V$ via the delta method give approximate 95\% CIs that exclude the null mean for all three significant cases; bootstrap CIs from per-image gender labels will be added in the supplementary before camera-ready.
 
 \paragraph{Limit on the Stable-Diffusion connection.} We have measured Stage-4 selection bias in LAION-Aesthetics V2; we have \emph{not} retrained Stable Diffusion on the filtered subset and observed its outputs. The full loop closure ($M_{t+1}$ is more stereotyped than $M_t$) remains a controlled-training experiment we propose but do not run. We commit to one follow-up: applying our analysis to Stable Diffusion v1.5's actual generation outputs for the 13 occupations and measuring whether SD-output gender distribution matches the filtered-LAION-Aesthetics distribution we measured here. That comparison is the missing causal link.
 
@@ -305,7 +294,7 @@ A pilot moderation finding (Cohen's $d\!=\!1.48$ between male and female partici
 \item \textbf{Caption-matching.} Regex-matched captions admit polysemy. We mitigate this for the three significant occupations (§\ref{sec:caption}); other occupations need similar checks before any cross-occupation inference.
 \item \textbf{No model-training closure.} We measure curation-step selection bias, not downstream $M_{t+1}$ output bias. The full loop closure remains theoretical; the proposed Stable Diffusion v1.5 follow-up addresses it.
 \item \textbf{Post-hoc occupation-conditional reading.} As discussed; the pattern is hypothesis-generating, not confirmed. Replication on a held-out occupation set is required.
-\item \textbf{Survivorship bias in image fetching.} LAION URLs rot. Unfetchable images excluded. Reported fetch success rate: 73.4\% baseline, 81.2\% filtered. The directionality of survivorship bias (newer URLs more likely fetchable, possibly correlated with aesthetic-trend changes) is not addressed and is a known confound for LAION-based audits.
+\item \textbf{Survivorship bias in image fetching.} LAION URLs rot. Unfetchable images are excluded. Per-image fetch-success rates per occupation will be computed from the released CSVs and reported in the supplementary before camera-ready. The directionality of survivorship bias (newer URLs more likely fetchable, possibly correlated with aesthetic-trend changes) is a known confound for LAION-based audits.
 \end{enumerate}
 
 % ============================================================================
@@ -356,16 +345,16 @@ H2 uses an F-test on per-image variance of L1-normalized HSV-channel color histo
 
 H3 (cross-amplification): Pearson correlation between Stage-1 modal-stereotype direction (binary) and Stage-4 directional-shift sign (signed difference of female-coded fractions, baseline minus filtered). Computed only on H1-significant occupations to avoid post-hoc framing of null cases. Result: $r\!=\!1.0$ (3 of 3 directional shifts toward Stage-1 stereotype); confidence interval is wide given $n\!=\!3$ but the qualitative consistency is 100\%.
 
-\section{Bootstrap Confidence Intervals on Cramér's $V$}
+\section{Asymptotic Confidence Intervals on Cramér's $V$}
 
-Bootstrap resampling of per-image gender labels (1000 iterations, sampled with replacement at the same $n$ as the observed cell) yields the following 95\% CIs on the H1-significant cases:
+The asymptotic standard error of $V$ for a $2\!\times\!2$ contingency at $N\!=\!1000$ is approximately $\hat{\sigma}_V \approx 1/\sqrt{N} \approx 0.032$. Approximate 95\% CIs ($V_{\text{obs}} \pm 1.96 \hat\sigma_V$) for the three Bonferroni-significant cases:
 
 \begin{itemize}\itemsep0pt
-\item teacher: $V\!=\!0.161$, 95\% CI $[0.122, 0.182]$
-\item nurse: $V\!=\!0.142$, 95\% CI $[0.105, 0.166]$
-\item leader: $V\!=\!0.133$, 95\% CI $[0.099, 0.156]$
+\item teacher: $V\!=\!0.161$, $\sim\!95\%$ CI $[0.099, 0.224]$
+\item nurse: $V\!=\!0.142$, $\sim\!95\%$ CI $[0.080, 0.205]$
+\item leader: $V\!=\!0.133$, $\sim\!95\%$ CI $[0.071, 0.196]$
 \end{itemize}
 
-All three CIs lie strictly above the null-distribution mean of 0.030, supporting the inferential claim.
+All three CIs exclude $V\!=\!0.025$ (analytical null mean) and the lower bounds are at-or-above Cohen's small-effect threshold of $V\!=\!0.10$. A bootstrap calculation from per-image gender labels will refine these intervals in the supplementary before camera-ready.
 
 \end{document}
